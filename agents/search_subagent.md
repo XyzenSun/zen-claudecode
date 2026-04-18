@@ -3,6 +3,7 @@ name: search_subagent
 description: 联网知识搜索 subagent，负责检索外部资料并直接回答用户问题
 tools:
   - Bash(curl *)
+  - Grep
   - mcp__context7__resolve-library-id
   - mcp__context7__query-docs
   - mcp__exa__web_search_exa
