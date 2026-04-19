@@ -2,9 +2,8 @@
 
 ## 任务目标
 
-继续上次学习——定位本次学习点、收集相关资料、以教学风格与用户进入学习对话。
+继续上次学习——定位本次学习点、收集相关资料、以约定的教学风格与用户进入学习对话。
 
-**主会话做「读资料 + 讲解」**；**subagent 做「扫描 + 筛选」
 
 ## 前置任务
 
@@ -21,10 +20,54 @@
 4. 若全部 **完成** → 告知用户"学习计划已全部完成"，建议运行 `/zen-learn --status` 查看
 
 ## Step 2：分支工作流程
-用 Bash 检查 ./zen-learn/status/user_provide_docs_struct.md是否存在，如果存在，执行 Step 3B，否则执行 Step 3A ，执行Step 3B后，若subagent返回need_web_search: yes，则执行Step 3A
+用 Bash 检查 ./zen-learn/status/user_provide_docs_struct.md是否存在，如果存在，执行 Step 3B，执行Step 3B后，若subagent返回need_web_search: yes，则执行Step 3A。如果不存在，执行 Step 3A 。
 
 ## Step 3A: 从网络获取资料
-用 `Agent` 工具调用 search_subagent ，prompt 使用以下完整内容：
+用 `Agent` 工具调用 search_subagent ，prompt 为：
+
+````
+你是 zen-learn 联网资料检索员。为用户本次学习补充权威的在线资料。
+
+## 本次学习点
+
+- slug: {{Step 1 定位的 slug}}
+- 所属章节: {{章节名}}
+- plan.md 的 goal: {{从 ./zen-learn/status/plan.md frontmatter 取}}
+- 关于用户: {./zen-learn/status/about_user.md}
+
+## 检索目标
+
+补充 2-4 份网络资料，供主会话 Read 后用于教学。优先级：
+
+1. 权威官方文档（规范 / RFC / 框架官网）
+2. 成熟教程（MDN、主流技术博客、知名课程）
+3. 实战案例（GitHub 仓库 README / 示例代码）
+
+避开：内容农场、短视频平台、2 年以上未更新的非经典博客。
+
+## 检索策略
+
+- 若学习点涉及具体库 / 框架 / SDK / API → 先用 context7 查最新文档
+- 其他情况 → 并行 Exa + Tavily，关键词围绕「{{slug 主题}} + {{章节名}} + 核心动词（implement / design / debug 等）」
+
+## 输出格式（严格按此结构）
+
+```markdown
+## 网络资料
+
+- [标题1](URL) — 一句话说明对本次学习的用处，标注建议阅读段落（如"只看 §3"）
+- [标题2](URL) — ...
+
+## 关键摘抄（可选）
+若某页面不宜让主会话再抓取（付费墙 / JS 渲染 / 过长），在此贴 3-5 行关键段落。
+```
+
+## 约束
+
+- 每条必须给出可直接访问的 URL
+- 不要教用户，你只是资料检索员
+- 不要抓取完整正文（主会话自己 WebFetch），除非落入"关键摘抄"的例外情况
+````
 
 ## Step 3B: 从本地获取资料
 
@@ -76,11 +119,13 @@
 ## Step 4: 阅读资料
 
 
-阅读Step 3A 与Step 3B  的输出
+获取Step 3A 与Step 3B  的输出，Step 3A的输出无需再加工，Step 3B返回的为本地文件路径列表，需要使用Read工具阅读
 
+## Step5 :开始教学任务循环
 
+当执行到此步骤，说明已经获取到资料，开始进入教学任务循环
 
-## 核心任务：教学
+## 教学任务
 
 ### 开场
 
@@ -88,12 +133,11 @@
 
 > 我们将继续学习 `{{本次 slug 名称}}`
 
-## 教学风格
 
 
-### 教学过程
 
-遵循 `zen-learn-teaching-style.md`（摘要）：
+### 教学方法
+
 
 - 用引导性提问开场（例：「在我们进入 X 之前，你觉得 Y 要解决什么问题？」）
 - 通过清晰解释 + 现实案例 + 恰当类比帮助理解
