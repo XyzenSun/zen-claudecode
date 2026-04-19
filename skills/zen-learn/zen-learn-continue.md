@@ -19,10 +19,14 @@
 3. 若无"进行中" ， 第一个 **未开始** 的小节
 4. 若全部 **完成** → 告知用户"学习计划已全部完成"，建议运行 `/zen-learn --status` 查看
 
-## Step 2：分支工作流程
-用 Bash 检查 ./zen-learn/status/user_provide_docs_struct.md是否存在，如果存在，执行 Step 3B，执行Step 3B后，若subagent返回need_web_search: yes，则执行Step 3A。如果不存在，执行 Step 3A 。
+## Step 2: 获取资料
 
-## Step 3A: 从网络获取资料
+用 Bash 检查 `./zen-learn/status/user_provide_docs_struct.md` 是否存在：
+
+- 存在则执行 Step 2B；若 subagent 返回 `need_web_search: yes`，再执行 Step 2A
+- 不存在则直接执行 Step 2A
+
+### Step 2A: 从网络获取资料
 用 `Agent` 工具调用 search_subagent ，prompt 为：
 
 ````
@@ -69,7 +73,7 @@
 - 不要抓取完整正文（主会话自己 WebFetch），除非落入"关键摘抄"的例外情况
 ````
 
-## Step 3B: 从本地获取资料
+### Step 2B: 从本地获取资料
 
 
 用 `Agent` 工具发起一次调用（`subagent_type: Explore`），prompt 使用以下完整内容：
@@ -92,7 +96,6 @@
 - 根据本次学习点的主题，筛出相关的本地文档路径
 - 输出"本地资料"清单：每项含 `path` 和 `相关段落/理由`
 - 若本地资料不充足，请输出"need_web_search: yes"，否则输出"need_web_search: no"
-```
 
 ## 输出格式（严格按此结构）
 
@@ -116,12 +119,12 @@
 ````
 
 
-## Step 4: 阅读资料
+## Step 3: 阅读资料
 
 
-获取Step 3A 与Step 3B  的输出，Step 3A的输出无需再加工，Step 3B返回的为本地文件路径列表，需要使用Read工具阅读
+获取 Step 2A 与 Step 2B 的输出。Step 2A（网络）的资料 search_subagent 已完成抓取，输出可直接使用；Step 2B（本地）返回的是本地文件路径列表，需要使用 Read 工具阅读正文
 
-## Step5 :开始教学任务循环
+## Step 4: 开始教学任务循环
 
 当执行到此步骤，说明已经获取到资料，开始进入教学任务循环
 
@@ -143,7 +146,7 @@
 - 通过清晰解释 + 现实案例 + 恰当类比帮助理解
 - 用户掌握某概念后，停用该类比，转入技术语言
 - 根据用户反馈调整节奏：用户迟疑 → 换角度再讲；用户秒懂 → 加速前进
-- 引用资料时说明完整路径（如 `./zen-learn/note/xxx.md:12`）
+- 引用资料时说明完整路径（如 `./zen-learn/note/xxx.md`）
 - 不要一次讲完所有内容，**分段讲 → 问 → 讲** 的循环
 
 ### 判断是否停止学习
@@ -152,11 +155,9 @@
 - 完成一个相对独立的子主题
 - 对话长度已较多，建议用户执行/zen-learn --update 持久化学习进度
 
-如果用户想要停止学习：
-询问用户
-> 今天学的不错！建议运行 `/zen-learn --update` 把本次学习持久化到 `./zen-learn/note/` 和 `progress.md`，然后 `/clear` 释放上下文，需要我帮你执行吗？
+如果用户想要停止学习，发送以下内容：
+> 今天学的不错！建议运行 `/zen-learn --update` 把本次学习持久化到 `./zen-learn/note/` 和 `progress.md`，然后 `/clear` 释放上下文
 
-如果用户回答是的，执行 `/zen-learn --update`，否则跳过。
 
 
 

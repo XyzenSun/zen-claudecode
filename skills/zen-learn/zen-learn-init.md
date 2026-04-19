@@ -5,7 +5,7 @@
 为用户初始化一个新的学习空间，在当前工作目录下生成：
 
 - `./zen-learn/status/plan.md`：学习总体方针
-- `./zen-learn/status/progress.md`：进度地图骨架
+- `./zen-learn/status/progress.md`：详细学习进度
 - `./zen-learn/status/about_user.md`：用户的基本信息
 - `./zen-learn/status/user_provide_docs_struct.md`：**仅当用户提供本地资料路径时生成**，索引本地资料
 - `./zen-learn/status/progress-schema.md`：**仅当资料无章节结构时生成**
@@ -43,8 +43,8 @@
 关于 `resources`：
 
 - 若用户给了**本地路径**：在单条消息内并发发起多个 `Agent` 调用（`subagent_type=Explore`），每个 agent 负责资料的一部分，返回后汇总为 `文件名 | 摘要 | 路径` 三列表格，写入 `./zen-learn/status/user_provide_docs_struct.md`
-- 若用户给了 **URL**：用 WebFetch 抓取
-- 若用户说**没有资料**：询问是否要你推荐——得到同意后可调用 `search_subagent`（详见 `agents/search_subagent.md`）联网检索权威教程或官方文档
+- 若用户给了 **URL**：用 WebFetch 抓取，若抓取失败，让用户复制页面内容发送给我，保存到本地并在 `./zen-learn/status/user_provide_docs_struct.md`中索引
+- 若用户说**没有资料**：调用 `search_subagent`联网检索权威教程或官方文档，保存到本地并在 `./zen-learn/status/user_provide_docs_struct.md`中索引
 
 ## Step 2: 资料结构分析
 
