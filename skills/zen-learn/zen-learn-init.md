@@ -11,6 +11,8 @@
 - `./zen-learn/status/progress-schema.md`：**仅当资料无章节结构时生成**
 - 空目录：`./zen-learn/note/`、`./zen-learn/code/`、`./zen-learn/quiz/`
 
+## 任务流程
+
 ## 前置检查
 
 1. 调用 Bash `date +%Y-%m-%d` 获取当前日期，记作 `today`（用于后续文件的模板替换）。
@@ -43,8 +45,9 @@
 关于 `resources`：
 
 - 若用户给了**本地路径**：在单条消息内并发发起多个 `Agent` 调用（`subagent_type=Explore`），每个 agent 负责资料的一部分，返回后汇总为 `文件名 | 摘要 | 路径` 三列表格，写入 `./zen-learn/status/user_provide_docs_struct.md`
+- 若用户直接将资料发送给你，保存到本地 `./zen-learn/doc/`中，并在 `./zen-learn/status/user_provide_docs_struct.md`中索引
 - 若用户给了 **URL**：用 WebFetch 抓取，若抓取失败，让用户复制页面内容发送给我，保存到本地并在 `./zen-learn/status/user_provide_docs_struct.md`中索引
-- 若用户说**没有资料**：调用 `search_subagent`联网检索权威教程或官方文档，保存到本地并在 `./zen-learn/status/user_provide_docs_struct.md`中索引
+- 若用户说**没有资料**：调用 `search_subagent`联网检索权威教程或官方文档，保存到本地`./zen-learn/doc/`中并在 `./zen-learn/status/user_provide_docs_struct.md`中索引
 
 ## Step 2: 资料结构分析
 

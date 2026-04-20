@@ -54,6 +54,10 @@ disable-model-invocation: false
 │   └── <slug>.md                     # 逐小节学习笔记（可由update 生成）
 ├── code/
 │   └── <slug>/                       # 逐小节代码示例（教学过程中按需生成）
-└── quiz/
-    └── <slug>-quiz.md                # 逐小节测验题与答案（由quiz 生成）
+|└── quiz/
+|   └── <slug>-quiz.md                # 逐小节测验题与答案（由quiz 生成）
+|
+|── doc/                               #存储网上搜索的资料
+
+
 ```

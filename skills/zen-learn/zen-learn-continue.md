@@ -156,7 +156,7 @@
 - 对话长度已较多，建议用户执行/zen-learn --update 持久化学习进度
 
 如果用户想要停止学习，发送以下内容：
-> 今天学的不错！建议运行 `/zen-learn --update` 把本次学习持久化到 `./zen-learn/note/` 和 `progress.md`，然后 `/clear` 释放上下文
+> 今天学的不错！建议运行 `/zen-learn --update` 把本次学习持久化到 `./zen-learn/note/` 和 `progress.md`，然后 `/clear` 释放上下文 
 
 
 
