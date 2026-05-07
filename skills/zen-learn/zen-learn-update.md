@@ -116,7 +116,13 @@ updated_at: {{today}}
 - **有明确要求**：按要求修订 `./zen-learn/status/plan.md`，更新其 `updated_at`
 - **无明确要求**：**不要**动 plan.md，即便你觉得 plan 需要调整也只是提示用户，由用户下次 update 时明确要求
 
-## Step 6: 展示与引导 /clear
+## Step 6: Git提交与push
+
+将新增的文件添加到git，简要总结本次学习内容（三十字以内）后 git commit -m "本次学习内容总结"，然后使用git remote -v 查询是否配置了远程仓库 ：
+如果未配置远程仓库，询问用户是否添加远程仓库push到远程仓库，如果用户拒绝，跳过push
+如果配置了远程仓库且唯一，git push
+如果配置了多个远程仓库： 询问用户push到哪一个
+## Step 7: 展示与引导 /clear
 
 向用户汇报：
 
