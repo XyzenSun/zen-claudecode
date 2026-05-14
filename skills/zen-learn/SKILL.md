@@ -1,7 +1,7 @@
 ---
 name: zen-learn
 description: 学习助手 skill，辅助用户记录学习进度、规划学习路径、讲解知识，通过 /zen-learn 显式触发，仅在用户明确处于 zen-learn 学习流程中（或输入包含 /zen-learn 命令）时使用*在普通对话或其他任何非 zen-learn 工作流中，绝对不要加载或调用这个 skill
-argument-hint: "[--init | --continue | --update | --quiz | --status | --help] [额外参数]"
+argument-hint: "[--init | --continue | --update | --quiz | --status | --help | --chat] [额外参数]"
 disable-model-invocation: false
 
 ---
@@ -35,6 +35,7 @@ disable-model-invocation: false
 | `--update` | `zen-learn-update.md` | 持久化本次学习产物：写 `note/<slug>.md`、更新 `progress.md` 的进度表与学习日志，并push到远程git仓库（如果有） |
 | `--quiz` | `zen-learn-quiz.md` | 针对当前或指定小节生成自测题，追加到 `quiz/<slug>-quiz.md` |
 | `--status` | `zen-learn-status.md` | 查看总体进度：已完成章节、小节分布、最近学习记录 |
+| `--chat` | `zen-learn-chat.md` | 通用对话，理解用户的需求，执行对应的操作 |
 | `--help`（默认） | `zen-learn-help.md` | 查看帮助 |
 
 
