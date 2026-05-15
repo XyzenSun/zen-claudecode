@@ -1,0 +1,7 @@
+{
+  "headers": {
+    "CONTEXT7_API_KEY": "KEY"
+  },
+  "type": "http",
+  "url": "https://mcp.context7.com/mcp"
+}
