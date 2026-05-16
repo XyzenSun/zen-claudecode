@@ -1,5 +1,5 @@
 { 
-   "statusLine": {
+  "statusLine": {
     "type": "command", 
     "command": "~/.claude/ccline/ccline.exe",
     "padding": 0
@@ -57,17 +57,13 @@
       "mcp__tavily"
     ],
     "deny": [
-      "Bash(rm:*)",
       "Bash(rm -rf:*)",
-      "Bash(del:*)",
-      "Bash(rmdir:*)",
       "Bash(rd /s:*)",
       "Bash(del /f:*)",
       "Bash(del /s:*)",
       "Bash(git reset --hard:*)",
-      "Bash(git reset:*)",
-      "Bash(git clean:*)",
-      "Bash(git restore:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --force:*)",
       "Bash(sudo:*)",
       "Bash(runas:*)",
       "Bash(powershell -ExecutionPolicy Bypass:*)",
@@ -79,8 +75,6 @@
       "Bash(format:*)",
       "Bash(diskpart:*)",
       "Bash(shutdown:*)",
-      "Bash(taskkill /f:*)",
-      "Bash(taskkill /F:*)",
       "Bash(net user:*)",
       "Bash(net localgroup:*)",
       "Bash(reg delete:*)",
@@ -91,18 +85,25 @@
       "Bash(move C:\\:*)",
       "Bash(move C\\\\:*)",
       "Bash(mv /*:*)",
-      "Edit(*.env)",
       "Write(~/.ssh/*)",
       "Write(%USERPROFILE%/.ssh/*)"
     ],
     "ask": [
       "Edit(*)",
       "Write(*)",
+      "Edit(*.env)",
+      "Bash(rm:*)",
+      "Bash(del:*)",
+      "Bash(rmdir:*)",
       "Bash(git push:*)",
-      "Bash(git push --force:*)",
       "Bash(git commit:*)",
       "Bash(git checkout --:*)",
-      "Bash(git branch -D:*)"
+      "Bash(git branch -D:*)",
+      "Bash(git reset:*)",
+      "Bash(git clean:*)",
+      "Bash(git restore:*)",
+      "Bash(taskkill /f:*)",
+      "Bash(taskkill /F:*)"
     ]
   }
 }
