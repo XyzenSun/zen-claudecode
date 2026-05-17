@@ -1,0 +1,1 @@
+#获取当前全局Claude.md 项目Claude.md已经所有父md 

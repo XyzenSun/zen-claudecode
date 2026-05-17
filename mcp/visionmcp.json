@@ -1,0 +1,10 @@
+{
+        "command": "npx",
+        "args": ["-y", "@xyzensun/visionmcp@latest"],
+        "env": {
+          "BASE_URL": "https://openai.com",
+          "FORMAT": "openai",
+          "API_KEY": "your_api_key_here",
+          "MODEL": "Qwen/Qwen3-VL-235B-A22B-Instruct"
+        }
+}
